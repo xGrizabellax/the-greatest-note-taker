@@ -1,0 +1,25 @@
+{
+  "name": "note-taker",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.15"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xGrizabellax/the-greatest-note-taker.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/xGrizabellax/the-greatest-note-taker/issues"
+  },
+  "homepage": "https://github.com/xGrizabellax/the-greatest-note-taker#readme",
+  "description": ""
+}
