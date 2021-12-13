@@ -15,7 +15,7 @@
   ## Installation:
   No installation instructions needed.
 
-  This project is deployed on Heroku. To view it click [here](<https://the-greatest-note-     taker.herokuapp.com/notes>).  
+  This project is deployed on Heroku. To view it click [here](https://the-greatest-note-     taker.herokuapp.com/notes).  
 
   ## Usage:
   For keeping track of your notes virtually. Never forget what you're working on or your upcoming   projects again.
