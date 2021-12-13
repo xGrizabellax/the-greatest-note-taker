@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const uuid = require('./helpers/uuid')
+let notes = require('./db/notes.json')
 
 const PORT = 3001;
 
@@ -20,37 +21,48 @@ app.get('/notes', (req, res) =>
     res.sendFile(path.join(__dirname, '/public/notes.html'))
 );
 
+app.get('/api/notes', (req, res) => {
+    res.json(notes)
+})
+
 app.post('/api/notes', (req, res) => {
     console.info(`${req.method} request recieved to add a note`)
 
     const { title, text } = req.body;
 
-    if (title && text) {
-        const newNote = {
-            title,
-            text,
-            id: uuid(),
-        };
-        const noteString = JSON.stringify(newNote);
+    const newNote = {
+        title,
+        text,
+        id: uuid(),
+    };
 
-        fs.writeFile(`./db/notes.json`, noteString, (err) =>
-            err
-                ? console.log(err)
-                : console.log(
-                    `Note for ${newNote.title} has been written to JSON file`
-                ));
+    notes.push(newNote)
+    console.log(notes)
 
-        const response = {
-            status: "success",
-            body: newNote,
-        };
+    fs.writeFile(`./db/notes.json`, JSON.stringify(notes), (err) =>
+        err
+            ? console.log(err)
+            : console.log(
+                `Note for ${newNote.title} has been written to JSON file`),
+    );
 
-        console.log(response)
-        res.status(201).json(response);
+    res.json(notes)
 
-    } else {
-    res.status(500).json('Error in posting review');
-    }
 });
+
+app.delete('/api/notes/:id', (req, res) => {
+    notes = notes.filter(x => x.id !== req.params.id)
+    // console.log(newNoteString)
+    
+    res.json(notes)
+
+    fs.writeFile(`./db/notes.json`, JSON.stringify(notes), (err) =>
+        err
+            ? console.log(err)
+            : console.log(
+                `Note for ${notes} has been written to JSON file`),
+    );
+});
+
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
